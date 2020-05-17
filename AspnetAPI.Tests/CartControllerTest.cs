@@ -21,8 +21,8 @@ namespace AspnetAPI.Tests
             {
                 context.Add(new Cart()
                 {
-                    ProductId = 2,
-                    Quantity = 6,
+                    ProductId = 1,
+                    Quantity = 5,
                     Product = new Product()
                     {
                         Name = "Test",
@@ -33,9 +33,6 @@ namespace AspnetAPI.Tests
             }
 
             Dictionary<string, float> cart;
-            // Cart cart = null;
-            // var cartEntryKey;
-            // var cartEntryValue;
             #endregion
 
             #region Act
@@ -55,7 +52,44 @@ namespace AspnetAPI.Tests
 
         // Test GetCartValue() method
 
+
         // Test AddToCart() method
+        [Fact]
+        public async void AddToCart()
+        {
+            #region Arrange
+            var options = new DbContextOptionsBuilder<AspnetAPIContext>()
+                .UseInMemoryDatabase(databaseName: "AspnetAPI")
+                .Options;
+
+            using (var context = new AspnetAPIContext(options))
+            {
+                context.Add(new Product()
+                {
+                    Name = "Test",
+                    Price = 0
+                });
+                context.SaveChanges();
+            }
+
+            Cart cartEntryCreated = null;
+            #endregion
+
+            #region Act
+            using (var context = new AspnetAPIContext(options))
+            {
+                var controller = new CartController(context);
+                await controller.AddToCart(1, 20);
+                cartEntryCreated = context.Cart.Find(1);
+            }
+            #endregion
+
+            #region Assert
+            Assert.NotNull(cartEntryCreated);
+            Assert.Equal(1,cartEntryCreated.ProductId);
+            Assert.Equal(20, cartEntryCreated.Quantity);
+            #endregion
+        }
 
         // Test DeleteCart() method
 
