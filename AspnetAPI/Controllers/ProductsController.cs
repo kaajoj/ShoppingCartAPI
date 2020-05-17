@@ -22,14 +22,14 @@ namespace AspnetAPI.Controllers
 
         // GET: products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> getProduct()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
             return await _context.Product.ToListAsync();
         }
 
         // GET: products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> getProduct(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _context.Product.FindAsync(id);
 
@@ -43,7 +43,7 @@ namespace AspnetAPI.Controllers
 
         // PUT: products/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> putProduct(int id, Product product)
+        public async Task<IActionResult> PutProduct(int id, Product product)
         {
             if (id != product.Id)
             {
@@ -58,7 +58,7 @@ namespace AspnetAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!productExists(id))
+                if (!ProductExists(id))
                 {
                     return NotFound();
                 }
@@ -73,17 +73,17 @@ namespace AspnetAPI.Controllers
 
         // POST: products
         [HttpPost]
-        public async Task<ActionResult<Product>> postProduct(Product product)
+        public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             _context.Product.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("getProduct", new { id = product.Id }, product);
+            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
         // DELETE: products/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Product>> deleteProduct(int id)
+        public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
             var product = await _context.Product.FindAsync(id);
             if (product == null)
@@ -97,7 +97,7 @@ namespace AspnetAPI.Controllers
             return product;
         }
 
-        private bool productExists(int id)
+        private bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.Id == id);
         }

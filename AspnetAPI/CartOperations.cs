@@ -17,7 +17,7 @@ namespace AspnetAPI
                     if (cartProduct.Quantity > 10)
                     {
                         cartProduct.Product.Price = 10;
-                    } else if (cartProduct.Quantity <= 10)
+                    } else if (cartProduct.Quantity <= 10)    // question to business - no clear requirement what if quantity equals exactly 10
                     {
                         cartProduct.Product.Price = 5;
                     }

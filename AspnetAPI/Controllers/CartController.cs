@@ -29,7 +29,7 @@ namespace AspnetAPI.Controllers
 
         // GET: cart/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cart>> getCart(int id)
+        public async Task<ActionResult<Cart>> GetCart(int id)
         {
             var cart = await _context.Cart.FirstAsync(p => p.ProductId == id);
 
@@ -59,19 +59,18 @@ namespace AspnetAPI.Controllers
 
         // DodajDoKoszyka() - POST: /cart/id/quantity
         [HttpPost("{id}/{quantity}")]
-        public async Task<ActionResult<Cart>> addToCart(int id, float quantity)
+        public async Task<ActionResult<Cart>> AddToCart(int id, float quantity)
         {
-            // Cart cart = new Cart { ProductId = id, Quantity = quantity };
             Cart cart = new Cart {ProductId = id, Quantity = quantity, Product = await _context.Product.FindAsync(id)};
             _context.Cart.Add(cart);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("getCart", new { id = cart.Id }, cart);
+            return CreatedAtAction("GetCart", new { id = cart.Id }, cart);
         }
 
         // UsunZKoszyka() - DELETE: /cart/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Cart>> deleteCart(int id)
+        public async Task<ActionResult<Cart>> DeleteCart(int id)
         {
             var cart = await _context.Cart.FirstAsync(p => p.ProductId == id);
             if (cart == null)
