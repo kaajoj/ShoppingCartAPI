@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AspnetAPI.Controllers;
+﻿using AspnetAPI.Controllers;
 using AspnetAPI.Data;
 using AspnetAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +20,7 @@ namespace AspnetAPI.Tests
             {
                 context.Add(new Product()
                 {
-                    Name = "Test1",
+                    Name = "Test",
                     Price = 0
                 });
                 context.SaveChanges();
@@ -44,15 +40,11 @@ namespace AspnetAPI.Tests
             #endregion
 
             #region Assert
+            Assert.NotNull(productExist);
+            Assert.Null(productNotExist);
 
-            Assert.True(
-                productExist != null
-                && productNotExist == null
-            );
-
-            Assert.Same("Test1", productExist.Name);
+            Assert.Equal("Test", productExist.Name);
             #endregion
-
         }
 
         // Test PostProduct() method
@@ -66,7 +58,7 @@ namespace AspnetAPI.Tests
 
             Product product = new Product()
             {
-                Name = "Test2",
+                Name = "Test",
                 Price = 0
             };
 
@@ -83,7 +75,7 @@ namespace AspnetAPI.Tests
             #endregion
 
             #region Assert
-            Assert.True(productCreated != null);
+            Assert.NotNull(productCreated);
             #endregion
 
         }
