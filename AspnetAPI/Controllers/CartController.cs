@@ -68,9 +68,9 @@ namespace AspnetAPI.Controllers
 
         // UsunZKoszyka() - DELETE: /cart/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Cart>> DeleteCart(int id)
+        public async Task<ActionResult<Cart>> DeleteFromCart(int id)
         {
-            var cart = await _context.Cart.FirstAsync(p => p.ProductId == id);
+            var cart = await _context.Cart.FirstOrDefaultAsync(p => p.ProductId == id);
             if (cart == null)
             {
                 return NotFound();
