@@ -26,7 +26,7 @@ namespace AspnetAPI.Tests
                     Name = "Test",
                     Price = 0
                 });
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
 
             Cart cartEntryCreated = null;
@@ -69,7 +69,7 @@ namespace AspnetAPI.Tests
                         Price = 0
                     }
                 });
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
 
             Cart removedFromCart = null;
@@ -112,7 +112,7 @@ namespace AspnetAPI.Tests
                         Price = 0
                     }
                 });
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
 
             Dictionary<string, float> cart;
@@ -163,7 +163,7 @@ namespace AspnetAPI.Tests
                         Price = 0
                     }
                 });
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
 
             decimal cartTotalValue;

@@ -1,4 +1,5 @@
-﻿using AspnetAPI.Controllers;
+﻿using System.Collections.Generic;
+using AspnetAPI.Controllers;
 using AspnetAPI.Data;
 using AspnetAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ namespace AspnetAPI.Tests
 {
     public class ProductsControllerTest
     {
-        // Test GetProduct() method
+        // Test GetProduct(int id) method
         [Fact]
         public async void GetProduct()
         {
@@ -23,11 +24,12 @@ namespace AspnetAPI.Tests
                     Name = "Test",
                     Price = 0
                 });
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
 
             Product productExist = null;
             Product productNotExist = null;
+            IEnumerable<Product> enumerable = null;
             #endregion
 
             #region Act
@@ -36,14 +38,16 @@ namespace AspnetAPI.Tests
                 var controller = new ProductsController(context);
                 productExist = (await controller.GetProduct(1)).Value;
                 productNotExist = (await controller.GetProduct(2)).Value;
+                // In addition test GetProduct() method
+                enumerable = (await controller.GetProduct()).Value;
             }
             #endregion
 
             #region Assert
             Assert.NotNull(productExist);
             Assert.Null(productNotExist);
-
             Assert.Equal("Test", productExist.Name);
+            Assert.NotNull(enumerable);
             #endregion
         }
 
