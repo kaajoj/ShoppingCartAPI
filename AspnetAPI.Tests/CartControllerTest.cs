@@ -16,7 +16,7 @@ namespace AspnetAPI.Tests
         {
             #region Arrange
             var options = new DbContextOptionsBuilder<AspnetAPIContext>()
-                .UseInMemoryDatabase(databaseName: "AspnetAPI")
+                .UseInMemoryDatabase(databaseName: "AspnetAPI1")
                 .Options;
 
             await using (var context = new AspnetAPIContext(options))
@@ -55,7 +55,7 @@ namespace AspnetAPI.Tests
         {
             #region Arrange
             var options = new DbContextOptionsBuilder<AspnetAPIContext>()
-                .UseInMemoryDatabase(databaseName: "AspnetAPI")
+                .UseInMemoryDatabase(databaseName: "AspnetAPI2")
                 .Options;
 
             await using (var context = new AspnetAPIContext(options))
@@ -99,7 +99,7 @@ namespace AspnetAPI.Tests
         {
             #region Arrange
             var options = new DbContextOptionsBuilder<AspnetAPIContext>()
-                .UseInMemoryDatabase(databaseName: "AspnetAPI")
+                .UseInMemoryDatabase(databaseName: "AspnetAPI3")
                 .Options;
             await using (var context = new AspnetAPIContext(options))
             {
@@ -141,7 +141,7 @@ namespace AspnetAPI.Tests
         {
             #region Arrange
             var options = new DbContextOptionsBuilder<AspnetAPIContext>()
-                .UseInMemoryDatabase(databaseName: "AspnetAPI")
+                .UseInMemoryDatabase(databaseName: "AspnetAPI4")
                 .Options;
             await using (var context = new AspnetAPIContext(options))
             {
